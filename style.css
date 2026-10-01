@@ -1,0 +1,56 @@
+:root { --orange:#ff8a1f; --deep:#c2410c; --text:#7a2e0e; --cream:#fff4e0; }
+* { box-sizing: border-box; }
+html, body { margin:0; min-height:100%; }
+body {
+  min-height:100vh; overflow-x:hidden;
+  font-family:"Quicksand", system-ui, sans-serif; color:var(--text);
+  background: radial-gradient(circle at 50% 0%, #fffaf0, transparent 45%),
+              linear-gradient(160deg, #ffc46b 0%, #ffa94d 50%, #ff8a5c 100%);
+}
+.floating { position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+.fl { position:absolute; bottom:-80px; animation:up linear infinite; user-select:none; }
+@keyframes up { to { transform:translateY(-115vh) rotate(25deg); } }
+.shell { position:relative; z-index:1; min-height:100vh; display:grid; place-items:center; padding:20px; }
+.card {
+  width:min(560px,94vw); padding:30px 30px 26px; text-align:center;
+  background:rgba(255,250,240,.82); border:1px solid rgba(255,255,255,.7);
+  border-radius:30px; box-shadow:0 26px 70px rgba(150,60,0,.25);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  animation:pop .5s cubic-bezier(.2,.9,.2,1);
+}
+@keyframes pop { from { opacity:0; transform:translateY(14px) scale(.97); } to { opacity:1; transform:none; } }
+.emoji { font-size:56px; line-height:1; animation:bob 3s ease-in-out infinite; }
+@keyframes bob { 50% { transform:translateY(-8px) rotate(3deg); } }
+h1 { font-family:"Fredoka", sans-serif; font-size:clamp(28px,6vw,38px); margin:8px 0 8px; color:var(--deep); line-height:1.1; }
+p { margin:0 0 18px; font-size:17px; line-height:1.5; }
+.row { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:center; min-height:60px; position:relative; }
+.btn {
+  border:0; border-radius:999px; padding:13px 24px; font:700 16px "Quicksand", sans-serif; cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease; -webkit-tap-highlight-color:transparent;
+}
+.btn:active { transform:scale(.96); }
+.yes { color:#fff; background:linear-gradient(135deg,#ff7a00,#ffa530); box-shadow:0 10px 24px rgba(255,122,0,.35); }
+.no  { color:var(--deep); background:#fff; box-shadow:0 8px 20px rgba(120,50,0,.15); }
+.choices { display:grid; gap:10px; margin-bottom:16px; }
+.choice {
+  border:2px solid rgba(255,138,31,.25); background:#fff; border-radius:18px; padding:13px 16px;
+  font:700 16px "Quicksand", sans-serif; color:var(--text); cursor:pointer; text-align:left; transition:.2s;
+}
+.choice small { display:block; font-weight:600; opacity:.7; margin-top:2px; }
+.choice:hover, .choice.on { border-color:var(--orange); background:#fff1dc; transform:translateY(-2px); }
+.chips { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-bottom:18px; }
+.chip { border:2px solid rgba(255,138,31,.3); background:#fff; border-radius:999px; padding:10px 16px; font:700 16px "Quicksand",sans-serif; color:var(--text); cursor:pointer; transition:.2s; }
+.chip.on { background:var(--orange); color:#fff; border-color:var(--orange); transform:scale(1.05); }
+.dots { display:flex; gap:7px; justify-content:center; margin-top:18px; }
+.dot { width:7px; height:7px; border-radius:50%; background:rgba(194,65,12,.2); }
+.dot.on { width:22px; border-radius:99px; background:var(--orange); }
+.ticket {
+  position:relative; text-align:left; margin:6px 0 18px; padding:18px 20px; border-radius:18px;
+  background:#fff; border:2px dashed var(--orange); line-height:1.7; font-weight:700;
+}
+.ticket .tt { font-family:"Fredoka",sans-serif; font-size:22px; color:var(--deep); text-align:center; margin-bottom:6px; }
+.ticket div span { opacity:.65; font-weight:600; }
+.confetti { position:fixed; top:-20px; z-index:9; pointer-events:none; animation:fall 1.8s linear forwards; }
+@keyframes fall { to { transform:translateY(110vh) rotate(500deg); opacity:0; } }
+.toast { position:fixed; left:50%; bottom:24px; transform:translate(-50%,30px); opacity:0; z-index:10; background:rgba(122,46,14,.94); color:#fff; padding:11px 18px; border-radius:999px; font-size:14px; transition:.25s; pointer-events:none; max-width:90vw; text-align:center; }
+.toast.show { transform:translate(-50%,0); opacity:1; }
